@@ -1,5 +1,5 @@
 require "terminal_crontab/version"
+require "terminal_crontab/converter"
 
 module TerminalCrontab
-  # Your code goes here...
 end
