@@ -11,19 +11,35 @@ module TerminalCrontab
     end
 
     def translate
-      [translate_time, translate_date, translate_weekday].join(' ').strip
+      [
+        'at',
+        translate_minute,
+        'of',
+        translate_hour,
+        translate_day,
+        translate_month,
+        translate_weekday
+      ].join(' ').strip
     end
 
     def translate_weekday
       return '' if weekday.star_key?
     end
 
-    def translate_date
-      return 'every day' if month.star_key? && date.star_key?
+    def translate_month
+      return '' if date.star_key?
     end
 
-    def translate_time
-      return 'at every minute' if minute.star_key? && hour.star_key?
+    def translate_day
+      return 'every day' if month.star_key?
+    end
+
+    def translate_minute
+      return 'every minute' if minute.star_key?
+    end
+
+    def translate_hour
+      return 'every hour' if hour.star_key?
     end
   end
 end
