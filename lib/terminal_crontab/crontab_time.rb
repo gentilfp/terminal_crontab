@@ -6,8 +6,25 @@ module TerminalCrontab
       @value = value
     end
 
+    def translate
+      return 'invalid' if invalid?
+      if list?
+        CrontabTimeList.translate(value)
+      elsif range?
+        CrontabTimeRange.translate(value)
+      elsif step?
+        CrontabTimeStep.translate(value)
+      elsif only_digit?
+        CrontabTimeDigit.format(value)
+      end
+    end
+
+    def invalid?
+      !valid?
+    end
+
     def valid?
-      ((list? ^ range? ^ step?) || only_digit?) && allowed_values?
+      (list? ^ range? ^ step? ^ only_digit?) && allowed_values?
     end
 
     def only_digit?

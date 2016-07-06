@@ -32,14 +32,17 @@ module TerminalCrontab
 
     def translate_day
       return 'every day' if month.star_key?
+      CrontabTime.new(month).translate
     end
 
     def translate_minute
       return 'every minute' if minute.star_key?
+      CrontabTime.new(month).translate
     end
 
     def translate_hour
       return 'every hour' if hour.star_key?
+      CrontabTime.new(month).translate
     end
   end
 end

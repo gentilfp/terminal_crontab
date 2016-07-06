@@ -3,6 +3,42 @@ require 'spec_helper'
 describe TerminalCrontab::CrontabTime do
   subject { described_class.new(value) }
 
+  describe '#translate' do
+    after { subject.translate }
+
+    context 'for list' do
+      let(:value) { '15,20,45' }
+
+      it 'calls for CrontabTimeList' do
+        expect(TerminalCrontab::CrontabTimeList).to receive(:translate).with(value)
+      end
+    end
+
+    context 'for range' do
+      let(:value) { '10-40' }
+
+      it 'calls for CrontabTimeRange' do
+        expect(TerminalCrontab::CrontabTimeRange).to receive(:translate).with(value)
+      end
+    end
+
+    context 'for step' do
+      let(:value) { '0/10' }
+
+      it 'calls for CrontabTimeStep' do
+        expect(TerminalCrontab::CrontabTimeStep).to receive(:translate).with(value)
+      end
+    end
+
+    context 'for digit' do
+      let(:value) { '1' }
+
+      it 'calls for CrontabDigit' do
+        expect(TerminalCrontab::CrontabTimeDigit).to receive(:format).with(value)
+      end
+    end
+  end
+
   describe '#valid?' do
     context 'true' do
       context 'for allowed_values' do
