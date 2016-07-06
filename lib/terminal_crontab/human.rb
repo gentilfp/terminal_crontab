@@ -27,22 +27,22 @@ module TerminalCrontab
     end
 
     def translate_month
-      return '' if date.star_key?
+      return '' if month.star_key?
     end
 
     def translate_day
-      return 'every day' if month.star_key?
-      CrontabTime.new(month).translate
-    end
-
-    def translate_minute
-      return 'every minute' if minute.star_key?
-      CrontabTime.new(month).translate
+      return 'every day' if date.star_key?
+      "on #{CrontabTime.new(date).translate} day"
     end
 
     def translate_hour
       return 'every hour' if hour.star_key?
-      CrontabTime.new(month).translate
+      "#{CrontabTime.new(hour).translate} hour"
+    end
+
+    def translate_minute
+      return 'every minute' if minute.star_key?
+      "#{CrontabTime.new(minute).translate} minute"
     end
   end
 end
