@@ -1,6 +1,6 @@
 module TerminalCrontab
   class CrontabTimeDigit
-    def self.format(value)
+    def self.ordinalize(value)
       value = value.to_i
 
       if (11..13).include?(value % 100)

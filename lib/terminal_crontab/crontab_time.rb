@@ -15,7 +15,7 @@ module TerminalCrontab
       elsif step?
         CrontabTimeStep.translate(value)
       elsif only_digit?
-        CrontabTimeDigit.format(value)
+        CrontabTimeDigit.ordinalize(value)
       end
     end
 

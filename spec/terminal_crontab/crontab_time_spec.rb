@@ -34,7 +34,7 @@ describe TerminalCrontab::CrontabTime do
       let(:value) { '1' }
 
       it 'calls for CrontabDigit' do
-        expect(TerminalCrontab::CrontabTimeDigit).to receive(:format).with(value)
+        expect(TerminalCrontab::CrontabTimeDigit).to receive(:ordinalize).with(value)
       end
     end
   end
